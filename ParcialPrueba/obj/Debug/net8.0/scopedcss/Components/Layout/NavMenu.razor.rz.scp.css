@@ -1,0 +1,33 @@
+body[b-tdebwjzz7c]{
+font-family: 'Courier New', Courier, monospace;
+background-color: #dfb71a;
+margin: 0;
+padding: auto;
+
+}
+
+.navbar[b-tdebwjzz7c]{
+    background-color: #3f53e6;
+    padding: auto;
+}
+
+.nav-link[b-tdebwjzz7c]{
+    background-color: rgb(83, 31, 150);
+    border-radius: 10px;
+    
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-tdebwjzz7c] {
+        display: none;
+    }
+
+    .nav-scrollable[b-tdebwjzz7c] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+
+        /* Allow sidebar to scroll for tall menus */
+        height: calc(100vh - 3.5rem);
+        overflow-y: auto;
+    }
+}

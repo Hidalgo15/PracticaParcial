@@ -1,0 +1,63 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using System.Text.Json;
+@inject NavigationManager NavMan
+@inject IJSRuntime JSx
+
+<PageTitle>Home</PageTitle>
+
+<h3>Historial de tardanza</h3>
+
+<div class= "text-end mb-3">
+    <button class="btn btn-secondary" @onclick ="Nuevo_Reporte">Nuevo Reporte<i class="fa-solid fa-house"></i>  </button>
+</div>
+
+<table class ="table">
+    <thead>
+        <tr>
+            <th>Matricula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Curso</th>
+            <th>Motivo</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var Reporte in Reportes)
+        {<tr>
+            <td>@Reporte.matricula </td>
+            <td>@Reporte.nombre </td>
+            <td>@Reporte.apellido </td>
+            <td>@Reporte.curso </td>
+            <td>@Reporte.motivo </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+
+@code{
+   List <Reporte> Reportes = new List<Reporte>  ();
+
+    private void Nuevo_Reporte(){
+        NavMan.NavigateTo("/Reporte/Nuevo");
+    }
+
+     protected override async Task OnAfterRenderAsync(bool firstRender){
+        if(firstRender)
+        {
+            var ReportesJson = await JSx.InvokeAsync<string>("localStorage.getItem", "Registros");
+
+
+            if(ReportesJson != null)
+            {
+                Reportes = JsonSerializer.Deserialize<List<Reporte>>(ReportesJson);
+                StateHasChanged();
+            }
+                
+        }
+    }
+
+}
